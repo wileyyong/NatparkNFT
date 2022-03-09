@@ -38,7 +38,7 @@ export default function AccountGeneral() {
     city: user?.city || '',
     zipCode: user?.zipCode || '',
     about: user?.about || '',
-    isPublic: user?.isPublic || false,
+    isPublic: user?.isPublic || '',
   };
 
   const methods = useForm({

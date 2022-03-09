@@ -1,7 +1,3 @@
-// mapboxgl
-// Fix map on production
-import '../../utils/mapboxgl';
-
 import MapGL from 'react-map-gl';
 import { useState } from 'react';
 // @mui

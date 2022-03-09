@@ -25,11 +25,9 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 
-import React, { StrictMode } from 'react';
+import { MoralisProvider } from "react-moralis";
 
 import ReactDOM from 'react-dom';
-import { MoralisProvider } from 'react-moralis';
-
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -57,53 +55,33 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 
-import HomePage from './pages/Home'
 // ----------------------------------------------------------------------
 
-const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
-const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
-
-const Application = () => {
-  const isServerInfo = (APP_ID && SERVER_URL) ;
-  // Validate
-  if (!APP_ID || !SERVER_URL)
-    throw new Error(
-      "Missing Moralis Application ID or Server URL. Make sure to set your .env file.",
-    );
-  if (isServerInfo)
-    return (
-      <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
-        <AuthProvider>
-          <HelmetProvider>
-            <ReduxProvider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <SettingsProvider>
-                    <CollapseDrawerProvider>
-                      <BrowserRouter>
-                        <App />
-                      </BrowserRouter>
-                    </CollapseDrawerProvider>
-                  </SettingsProvider>
-                </LocalizationProvider>
-              </PersistGate>
-            </ReduxProvider>
-          </HelmetProvider>
-        </AuthProvider>
-      </MoralisProvider>
-    );
-  return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <HomePage />
-    </div>
-  );
-};
+const moralisServerURL = process.env.REACT_APP_MORALIS_SERVER_URL;
+const moralisAppId = process.env.REACT_APP_MORALIS_APPLICATION_ID
 
 ReactDOM.render(
-  <Application />,
-  document.getElementById("root"),
+  <AuthProvider>
+    <HelmetProvider>
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SettingsProvider>
+              <CollapseDrawerProvider>
+                <BrowserRouter>
+                  <MoralisProvider serverUrl={moralisServerURL} appId={moralisAppId}>
+                    <App />
+                  </MoralisProvider>
+                </BrowserRouter>
+              </CollapseDrawerProvider>
+            </SettingsProvider>
+          </LocalizationProvider>
+        </PersistGate>
+      </ReduxProvider>
+    </HelmetProvider>
+  </AuthProvider>,
+  document.getElementById('root')
 );
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

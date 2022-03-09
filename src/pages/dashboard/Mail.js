@@ -18,13 +18,9 @@ import { MailList, MailDetails, MailSidebar, MailCompose } from '../../sections/
 
 export default function Mail() {
   const { themeStretch } = useSettings();
-
   const dispatch = useDispatch();
-
   const { mailId } = useParams();
-
   const [openSidebar, setOpenSidebar] = useState(false);
-
   const [openCompose, setOpenCompose] = useState(false);
 
   useEffect(() => {

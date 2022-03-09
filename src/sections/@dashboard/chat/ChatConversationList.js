@@ -34,7 +34,7 @@ export default function ChatConversationList({ conversations, isOpenSidebar, act
         conversationKey = otherParticipant?.username;
       }
     }
-    navigate(PATH_DASHBOARD.chat.view(conversationKey));
+    navigate(`${PATH_DASHBOARD.chat.root}/${conversationKey}`);
   };
 
   const loading = !conversations.allIds.length;

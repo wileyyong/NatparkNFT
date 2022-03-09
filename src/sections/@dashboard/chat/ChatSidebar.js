@@ -121,7 +121,7 @@ export default function ChatSidebar() {
   const handleSearchSelect = (username) => {
     setSearchFocused(false);
     setSearchQuery('');
-    navigate(PATH_DASHBOARD.chat.view(username));
+    navigate(`${PATH_DASHBOARD.chat.root}/${username}`);
   };
 
   const handleSelectContact = (result) => {

@@ -55,7 +55,7 @@ export default function LoginForm() {
       console.error(error);
       reset();
       if (isMountedRef.current) {
-        setError('afterSubmit', { ...error, message: error.message });
+        setError('afterSubmit', error);
       }
     }
   };

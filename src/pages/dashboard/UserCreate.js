@@ -12,17 +12,14 @@ import { _userList } from '../../_mock';
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 // sections
-import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
+import UserNewForm from '../../sections/@dashboard/user/UserNewForm';
 
 // ----------------------------------------------------------------------
 
 export default function UserCreate() {
   const { themeStretch } = useSettings();
-
   const { pathname } = useLocation();
-
   const { name = '' } = useParams();
-
   const isEdit = pathname.includes('edit');
 
   const currentUser = _userList.find((user) => paramCase(user.name) === name);
@@ -39,7 +36,7 @@ export default function UserCreate() {
           ]}
         />
 
-        <UserNewEditForm isEdit={isEdit} currentUser={currentUser} />
+        <UserNewForm isEdit={isEdit} currentUser={currentUser} />
       </Container>
     </Page>
   );

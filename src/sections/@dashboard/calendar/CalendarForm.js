@@ -183,7 +183,7 @@ export default function CalendarForm({ event, range, onCancel }) {
           Cancel
         </Button>
 
-        <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+        <LoadingButton type="submit" variant="contained" loading={isSubmitting} loadingIndicator="Loading...">
           Add
         </LoadingButton>
       </DialogActions>

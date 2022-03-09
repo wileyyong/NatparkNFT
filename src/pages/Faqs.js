@@ -22,7 +22,7 @@ export default function Faqs() {
       <RootStyle>
         <FaqsHero />
 
-        <Container sx={{ mt: 15, mb: 10, position: 'relative' }}>
+        <Container sx={{ mt: 15, mb: 10 }}>
           <FaqsCategory />
 
           <Typography variant="h3" sx={{ mb: 5 }}>

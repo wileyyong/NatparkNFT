@@ -16,12 +16,11 @@ const ICONS = {
   user: getIcon('ic_user'),
   kanban: getIcon('ic_kanban'),
   banking: getIcon('ic_banking'),
-  booking: getIcon('ic_booking'),
-  invoice: getIcon('ic_invoice'),
   calendar: getIcon('ic_calendar'),
   ecommerce: getIcon('ic_ecommerce'),
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('ic_dashboard'),
+  booking: getIcon('ic_booking'),
 };
 
 const navConfig = [
@@ -43,7 +42,7 @@ const navConfig = [
   {
     subheader: 'management',
     items: [
-      // USER
+      // MANAGEMENT : USER
       {
         title: 'user',
         path: PATH_DASHBOARD.user.root,
@@ -52,49 +51,37 @@ const navConfig = [
           { title: 'profile', path: PATH_DASHBOARD.user.profile },
           { title: 'cards', path: PATH_DASHBOARD.user.cards },
           { title: 'list', path: PATH_DASHBOARD.user.list },
-          { title: 'create', path: PATH_DASHBOARD.user.new },
-          { title: 'edit', path: PATH_DASHBOARD.user.demoEdit },
+          { title: 'create', path: PATH_DASHBOARD.user.newUser },
+          { title: 'edit', path: PATH_DASHBOARD.user.editById },
           { title: 'account', path: PATH_DASHBOARD.user.account },
         ],
       },
 
-      // E-COMMERCE
+      // MANAGEMENT : E-COMMERCE
       {
         title: 'e-commerce',
         path: PATH_DASHBOARD.eCommerce.root,
         icon: ICONS.cart,
         children: [
           { title: 'shop', path: PATH_DASHBOARD.eCommerce.shop },
-          { title: 'product', path: PATH_DASHBOARD.eCommerce.demoView },
+          { title: 'product', path: PATH_DASHBOARD.eCommerce.productById },
           { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
-          { title: 'create', path: PATH_DASHBOARD.eCommerce.new },
-          { title: 'edit', path: PATH_DASHBOARD.eCommerce.demoEdit },
+          { title: 'create', path: PATH_DASHBOARD.eCommerce.newProduct },
+          { title: 'edit', path: PATH_DASHBOARD.eCommerce.editById },
           { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
+          { title: 'invoice', path: PATH_DASHBOARD.eCommerce.invoice },
         ],
       },
 
-      // INVOICE
-      {
-        title: 'invoice',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.invoice,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
-      },
-
-      // BLOG
+      // MANAGEMENT : BLOG
       {
         title: 'blog',
         path: PATH_DASHBOARD.blog.root,
         icon: ICONS.blog,
         children: [
           { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-          { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-          { title: 'create', path: PATH_DASHBOARD.blog.new },
+          { title: 'post', path: PATH_DASHBOARD.blog.postById },
+          { title: 'new post', path: PATH_DASHBOARD.blog.newPost },
         ],
       },
     ],
@@ -117,7 +104,11 @@ const navConfig = [
       },
       { title: 'chat', path: PATH_DASHBOARD.chat.root, icon: ICONS.chat },
       { title: 'calendar', path: PATH_DASHBOARD.calendar, icon: ICONS.calendar },
-      { title: 'kanban', path: PATH_DASHBOARD.kanban, icon: ICONS.kanban },
+      {
+        title: 'kanban',
+        path: PATH_DASHBOARD.kanban,
+        icon: ICONS.kanban,
+      },
     ],
   },
 ];

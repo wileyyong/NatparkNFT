@@ -18,7 +18,6 @@ import { KanbanColumn, KanbanColumnAdd } from '../../sections/@dashboard/kanban'
 
 export default function Kanban() {
   const dispatch = useDispatch();
-
   const { board } = useSelector((state) => state.kanban);
 
   useEffect(() => {

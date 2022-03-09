@@ -13,7 +13,7 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import ProductNewEditForm from '../../sections/@dashboard/e-commerce/ProductNewEditForm';
+import ProductNewForm from '../../sections/@dashboard/e-commerce/ProductNewForm';
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ export default function EcommerceProductCreate() {
           ]}
         />
 
-        <ProductNewEditForm isEdit={isEdit} currentProduct={currentProduct} />
+        <ProductNewForm isEdit={isEdit} currentProduct={currentProduct} />
       </Container>
     </Page>
   );

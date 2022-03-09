@@ -113,7 +113,7 @@ export default function HomeHero() {
                   }
                   value={
                     <Link
-                      href="https://www.sketch.com/s/76388a4d-d6e5-4b7f-8770-e5446bfa1268"
+                      href="https://www.sketch.com/s/0fa4699d-a3ff-4cd5-a3a7-d851eb7e17f0"
                       target="_blank"
                       rel="noopener"
                       color="common.white"
