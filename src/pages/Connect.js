@@ -1,4 +1,5 @@
 import { useMoralis } from 'react-moralis';
+import { useNavigate } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Button, Typography, Box, Grid, Link, CardMedia } from '@mui/material';
@@ -9,6 +10,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import useLocalStorage from '../hooks/useLocalStorage';
+import useAuth from '../hooks/useAuth';
 
 import Page from '../components/Page';
 import Image from '../components/Image';
@@ -69,8 +73,10 @@ WalletDialog.propTypes = {
 
 function App() {
 
+  const navigate = useNavigate();
   const { isWeb3Enabled, isAuthenticated, enableWeb3, authenticate } = useMoralis();
-
+  const { login } = useAuth();
+  
   useEffect(() => {
     if (!isWeb3Enabled && isAuthenticated) {
       enableWeb3({provider: "walletconnect", chainId: 56});
@@ -80,6 +86,8 @@ function App() {
 
   const [open, setOpen] = useState(false);
   const [selectedWallet, setSelectedWallet] = useState(null);
+  const [metaUser, setMetaUser] = useState(null);
+  const [walletUser, setWalletUser] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -97,6 +105,7 @@ function App() {
         chainId: 56,
         signingMessage: "Hello wallet"
       });
+      login(user);
       setWalletUser(user);
     }
   
@@ -104,6 +113,7 @@ function App() {
       const user = await authenticate({
         signingMessage: "Hello metamask"
       });
+      login(user);
       setMetaUser(user)
     }
 
@@ -119,8 +129,11 @@ function App() {
     }
   }, [selectedWallet, authenticate]);
 
-  const [metaUser, setMetaUser] = useState(null);
-  const [walletUser, setWalletUser] = useState(null);
+  useEffect(() => {
+    if(walletUser || metaUser) {
+      navigate('/mynfts');
+    }
+  }, [walletUser, metaUser]);
 
   return (
     <Page title="Connect" sx={{backgroundColor: '#161c24'}}>

@@ -74,7 +74,7 @@ export default function MainHeader() {
             justifyContent: 'space-between',
           }}
         >
-          <Logo />
+          {/* <Logo />
 
           <Label color="info" sx={{ ml: 1 }}>
             v3.0.0
@@ -92,7 +92,7 @@ export default function MainHeader() {
             Purchase Now
           </Button>
 
-          {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
+          {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />} */}
         </Container>
       </ToolbarStyle>
 

@@ -6,6 +6,7 @@ import Logo from '../../components/Logo';
 //
 import MainFooter from './MainFooter';
 import MainHeader from './MainHeader';
+import MainBody from './MainBody';
 
 // ----------------------------------------------------------------------
 
@@ -18,10 +19,9 @@ export default function MainLayout() {
     <Stack sx={{ minHeight: 1 }}>
       <MainHeader />
 
-      <Outlet />
-
-      <Box sx={{ flexGrow: 1 }} />
-
+      <MainBody>
+        <Outlet />
+      </MainBody>
       {!isHome ? (
         <MainFooter />
       ) : (

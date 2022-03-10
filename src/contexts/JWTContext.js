@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // utils
 import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 // ----------------------------------------------------------------------
 
@@ -64,6 +65,8 @@ AuthProvider.propTypes = {
 };
 
 function AuthProvider({ children }) {
+  const [loggedIn, setLoggedIn] = useLocalStorage('loggedIn', false);
+  const [user, setuser] = useLocalStorage('user', false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -108,14 +111,20 @@ function AuthProvider({ children }) {
     initialize();
   }, []);
 
-  const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
-      email,
-      password,
-    });
-    const { accessToken, user } = response.data;
+  useEffect(() => {
+    if(loggedIn) {
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          user: state.user || user
+        }
+      })
+    }
+  }, [loggedIn]);
 
-    setSession(accessToken);
+  const login = async (user) => {
+    setLoggedIn(true);
+    setuser(user);
     dispatch({
       type: 'LOGIN',
       payload: {

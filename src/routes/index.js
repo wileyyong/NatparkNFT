@@ -51,6 +51,7 @@ export default function Router() {
         { path: 'register-unprotected', element: <Register /> },
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'verify', element: <VerifyCode /> },
+        { path: 'connect', element: <Connect /> },
       ],
     },
 
@@ -143,22 +144,31 @@ export default function Router() {
     },
     {
       path: '/',
-      // element: <MainLayout />,
-      element: <Navigate to="/connect" replace />,
+      element: <MainLayout />,
+      // element: <Navigate to="/connect" replace />,
       children: [
-        { element: <HomePage />, index: true },
+        { 
+          element:
+            <AuthGuard>
+              <Navigate to="/mynfts" replace /> 
+            </AuthGuard>,
+          index: true 
+        },
+        { path: 'mynfts', element: <MyNFTs /> },
         { path: 'about-us', element: <About /> },
         { path: 'contact-us', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },
       ],
     },
+    
     { path: '*', element: <Navigate to="/404" replace /> },
-    { path: 'connect', element: <Connect /> },
   ]);
 }
 
 // connect
 const Connect = Loadable(lazy(() => import('../pages/Connect')));
+
+const MyNFTs = Loadable(lazy(() => import('../pages/MyNFTs')));
 
 // IMPORT COMPONENTS
 
