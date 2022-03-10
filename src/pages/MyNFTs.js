@@ -31,18 +31,16 @@ function MyNFTs() {
 
 	useEffect(() => {
 		getNFTBalances({ params: { chain: chainId || "0x4" }}).then(({result}) => {
-			setNFTs(
-				result
-				.map(item => ({
-					...item, 
-					metadata: JSON.parse(item.metadata)
-				})))
-				.filter(item => item.metadata);
+			const data = result.map(item => ({
+				...item, 
+				metadata: JSON.parse(item.metadata)
+			})).filter(item => item.metadata);
+			setNFTs(data);
 		});
 	}, []);
 
 	return (
-		<Page title="Connect">
+		<div >
 			<NFTInfo>
 				<div>
 					<div>Collected</div>
@@ -53,8 +51,8 @@ function MyNFTs() {
 				nfts.length > 0 ? (
 					<NFTDiv>
 						{
-							nfts.filter(item => item.metadata).map((item) => (
-								<Card sx={{ maxWidth: 345 }}>
+							nfts.filter(item => item.metadata).map((item, index) => (
+								<Card key={index}>
 									<CardMedia
 										component="img"
 										alt="green iguana"
@@ -75,7 +73,7 @@ function MyNFTs() {
 					</NFTDiv>
 				) : <Typography variant='h5'>No NFTs</Typography>
 			}
-		</Page>
+		</div>
 	);
 }
 
