@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { useNFTBalances, useChain } from "react-moralis";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-
-import Page from '../components/Page';
 
 const NFTDiv = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -24,20 +23,23 @@ const NFTInfo = styled('div')(({ theme }) => ({
 }));
 
 function MyNFTs() {
-	const { getNFTBalances, data, error, isLoading, isFetching } = useNFTBalances();
-	const { chainId } = useChain();
+	const { getNFTBalances } = useNFTBalances();
+	const routeParams = useParams();
 
 	const [nfts, setNFTs] = useState([]);
 
 	useEffect(() => {
-		getNFTBalances().then(({result}) => {
+		const params = {
+			address: routeParams.id,
+		};
+		getNFTBalances({params}).then(({result}) => {
 			const data = result.map(item => ({
 				...item, 
 				metadata: JSON.parse(item.metadata)
 			})).filter(item => item.metadata);
 			setNFTs(data);
 		});
-	}, []);
+	}, [routeParams.id]);
 
 	return (
 		<div >

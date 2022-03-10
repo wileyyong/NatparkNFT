@@ -174,6 +174,13 @@ export default function Router() {
               <LeaderBoard />
             </AuthGuard>
         },
+        {
+          path: 'owners/:id',
+          element: 
+            <AuthGuard>
+              <Owner />
+            </AuthGuard>
+        },
         { path: 'about-us', element: <About /> },
         { path: 'contact-us', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },
@@ -189,6 +196,7 @@ const Connect = Loadable(lazy(() => import('../pages/Connect')));
 
 const MyNFTs = Loadable(lazy(() => import('../pages/MyNFTs')));
 const LeaderBoard = Loadable(lazy(() => import('../pages/LeaderBoard')));
+const Owner = Loadable(lazy(() => import('../pages/Owner')));
 
 // IMPORT COMPONENTS
 
