@@ -53,7 +53,7 @@ function MyNFTs() {
 				nfts.length > 0 ? (
 					<NFTDiv>
 						{
-							nfts.map((item) => (
+							nfts.filter(item => item.metadata).map((item) => (
 								<Card sx={{ maxWidth: 345 }}>
 									<CardMedia
 										component="img"
