@@ -51,8 +51,14 @@ export default function Router() {
         { path: 'register-unprotected', element: <Register /> },
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'verify', element: <VerifyCode /> },
-        { path: 'connect', element: <Connect /> },
       ],
+    },
+    { 
+      path: '/connect', 
+      element: 
+        <GuestGuard>
+          <Connect />
+        </GuestGuard>
     },
 
     // Dashboard Routes
@@ -154,7 +160,13 @@ export default function Router() {
             </AuthGuard>,
           index: true 
         },
-        { path: 'mynfts', element: <MyNFTs /> },
+        { 
+          path: 'mynfts', 
+          element: 
+            <AuthGuard>
+              <MyNFTs />
+            </AuthGuard>
+        },
         { path: 'about-us', element: <About /> },
         { path: 'contact-us', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },

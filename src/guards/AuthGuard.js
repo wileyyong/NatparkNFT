@@ -27,7 +27,7 @@ export default function AuthGuard({ children }) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
     }
-    return <Navigate to={'/auth/connect'} />;
+    return <Navigate to={'/connect'} />;
   }
 
   return <>{children}</>;
