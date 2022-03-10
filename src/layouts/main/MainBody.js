@@ -10,7 +10,8 @@ import MainSidebar from './MainSidebar';
 const BodyDiv = styled('div')(({ theme }) => ({
   display: 'flex',
   flex: 1,
-  marginTop: '88px'
+  marginTop: '88px',
+  padding: '20px',
 }));
 
 const ContentDiv = styled('div')(({ theme}) => ({

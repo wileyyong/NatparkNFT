@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useNFTBalances, useChain } from "react-moralis";
+import React, { useEffect, useState, useMemo, useContext } from 'react';
+import { useNFTBalances, useMoralisWeb3Api } from "react-moralis";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
-import Page from '../components/Page';
+import NFTInfo from '../components/NFTInfo';
+import useAuth from '../hooks/useAuth';
 
 const NFTDiv = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -11,27 +12,15 @@ const NFTDiv = styled('div')(({ theme }) => ({
 	gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
 }));
 
-const NFTInfo = styled('div')(({ theme }) => ({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	width: '50%',
-	borderRadius: '16px',
-	backgroundColor: '#005249',
-	color: '#FFFFFF',
-	padding: '20px',
-	marginBottom: '20px'
-}));
-
 function MyNFTs() {
-	const { getNFTBalances, data, error, isLoading, isFetching } = useNFTBalances();
-	const { chainId } = useChain();
+	const { getNFTBalances } = useNFTBalances();
+  const { user } = useAuth();
 
 	const [nfts, setNFTs] = useState([]);
 
 	useEffect(() => {
 		getNFTBalances().then(({result}) => {
-			const data = result.map(item => ({
+			const data = result?.map(item => ({
 				...item, 
 				metadata: JSON.parse(item.metadata)
 			})).filter(item => item.metadata);
@@ -39,14 +28,10 @@ function MyNFTs() {
 		});
 	}, []);
 
+
 	return (
 		<div >
-			<NFTInfo>
-				<div>
-					<div>Collected</div>
-					<div>{ nfts.length }</div>
-				</div>
-			</NFTInfo>
+			<NFTInfo address={user.ethAddress} />
 			{
 				nfts.length > 0 ? (
 					<NFTDiv>
