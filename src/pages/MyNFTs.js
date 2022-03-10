@@ -30,8 +30,14 @@ function MyNFTs() {
 	const [nfts, setNFTs] = useState([]);
 
 	useEffect(() => {
-		getNFTBalances({ params: { chain: chainId || "0x4" }}).then((data) => {
-			setNFTs(data.result.map(item => ({...item, metadata: JSON.parse(item.metadata)})));
+		getNFTBalances({ params: { chain: chainId || "0x4" }}).then(({result}) => {
+			setNFTs(
+				result
+				.map(item => ({
+					...item, 
+					metadata: JSON.parse(item.metadata)
+				})))
+				.filter(item => item.metadata);
 		});
 	}, []);
 
@@ -43,30 +49,32 @@ function MyNFTs() {
 					<div>{ nfts.length }</div>
 				</div>
 			</NFTInfo>
-			<NFTDiv>
-				{
-					nfts
-					.filter(item => item.metadata)
-					.map((item) => (
-						<Card sx={{ maxWidth: 345 }}>
-							<CardMedia
-								component="img"
-								alt="green iguana"
-								height="350"
-								image={item.metadata.image}
-							/>
-							<CardContent>
-								<Typography gutterBottom variant="h5" component="div">
-									{ item.metadata.name }
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{ item.metadata.description }
-								</Typography>
-							</CardContent>
-						</Card>
-					))
-				}
-			</NFTDiv>
+			{
+				nfts.length > 0 ? (
+					<NFTDiv>
+						{
+							nfts.map((item) => (
+								<Card sx={{ maxWidth: 345 }}>
+									<CardMedia
+										component="img"
+										alt="green iguana"
+										height="350"
+										image={item.metadata.image}
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="h5" component="div">
+											{ item.metadata.name }
+										</Typography>
+										<Typography variant="body2" color="text.secondary">
+											{ item.metadata.description }
+										</Typography>
+									</CardContent>
+								</Card>
+							))
+						}
+					</NFTDiv>
+				) : <Typography variant='h5'>No NFTs</Typography>
+			}
 		</Page>
 	);
 }
