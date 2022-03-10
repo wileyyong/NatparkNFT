@@ -69,7 +69,7 @@ export default function NFTInfo({address}) {
 
   const collectedParks = useMemo(() => {
     let result = [];
-    result = nfts.filter(item => item.owner_of === '0x00');
+    result = nfts.filter(item => item.owner_of === address);
     return result;
   }, [nfts]);
 
