@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useNFTBalances } from "react-moralis";
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import NFTInfo from '../components/NFTInfo';
@@ -32,8 +32,10 @@ function MyNFTs() {
 	}, [routeParams.id]);
 
 	return (
-		<div >
-			<NFTInfo address={routeParams.id} />
+		<div>
+			<Box mb={2}>
+				<NFTInfo address={routeParams.id} />
+			</Box>
 			{
 				nfts.length > 0 ? (
 					<NFTDiv>
