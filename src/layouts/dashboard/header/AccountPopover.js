@@ -4,6 +4,8 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
+
+import { useMoralis } from 'react-moralis';
 // routes
 import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
 // hooks
@@ -27,6 +29,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
+  const { logout: mLogout } = useMoralis();
 
   const { user, logout } = useAuth();
 
@@ -47,7 +50,8 @@ export default function AccountPopover() {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate(PATH_AUTH.login, { replace: true });
+      mLogout();
+      navigate(PATH_AUTH.connect, { replace: true });
 
       if (isMountedRef.current) {
         handleClose();
