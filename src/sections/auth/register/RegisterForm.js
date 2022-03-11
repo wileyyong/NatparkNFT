@@ -16,6 +16,8 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
+import { PATH_DASHBOARD } from '../../../routes/paths';
+
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -63,6 +65,7 @@ export default function RegisterForm() {
         email, 
         discordName
       });
+      navigate(PATH_DASHBOARD.mynfts);
     } catch (error) {
       console.error(error);
       reset();
