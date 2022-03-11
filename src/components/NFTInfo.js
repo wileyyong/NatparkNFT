@@ -3,6 +3,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
 import { styled } from '@mui/material/styles';
 
+import NFTInfoCard from '../sections/NFTInfoCard';
+
 const NFTInfoDiv = styled('div')(({theme}) => ({
   '&': {
     display: 'flex',
@@ -91,29 +93,21 @@ export default function NFTInfo({address}) {
 
   return (
     <NFTInfoDiv>
-      <div className={'item'}>
-        <div>
-          <div>{ collectedItems.length }</div>
-          <div>Items Collected</div>
-        </div>
-        <div>
-          <div>{ collectedParks.length }</div>
-          <div>Parks Collected</div>
-        </div>
-      </div>
-      <div className={'item'}>
-        <div>
-          NPNFT
-        </div>
-        <div>
-          <div>{ nfts.length }</div>
-          <div>Items</div>
-        </div>
-        <div>
-          <div>{ users.length }</div>
-          <div>Owners</div>
-        </div>
-      </div>
+      
+      <NFTInfoCard
+        logoText="" 
+        firstTitle="Items Collected" 
+        firstTotal={collectedItems.length}
+        secondTitle="Parks Collected"
+        secondValue={collectedParks.length} 
+      />
+      <NFTInfoCard
+        logoText="NPNFT" 
+        firstTitle="Items" 
+        firstTotal={nfts.length}
+        secondTitle="Owners"
+        secondTotal={users.length}
+      />
     </NFTInfoDiv>
   )
 }
