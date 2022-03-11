@@ -42,9 +42,9 @@ export default function Router() {
         {
           path: 'register',
           element: (
-            <GuestGuard>
+            <AuthGuard>
               <Register />
-            </GuestGuard>
+            </AuthGuard>
           ),
         },
         { path: 'login-unprotected', element: <Login /> },
@@ -150,7 +150,7 @@ export default function Router() {
     },
     {
       path: '/',
-      element: <MainLayout />,
+      element: <DashboardLayout />,
       // element: <Navigate to="/connect" replace />,
       children: [
         { 
@@ -181,9 +181,6 @@ export default function Router() {
               <Owner />
             </AuthGuard>
         },
-        { path: 'about-us', element: <About /> },
-        { path: 'contact-us', element: <Contact /> },
-        { path: 'faqs', element: <Faqs /> },
       ],
     },
     

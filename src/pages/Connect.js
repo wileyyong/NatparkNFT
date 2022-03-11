@@ -100,21 +100,37 @@ function App() {
 
   useEffect(() => {
     const authWalletConnect = async () => {
-      const user = authenticate({
-        provider: "walletconnect",
-        chainId: 56,
-        signingMessage: "Hello wallet"
-      });
-      login(user);
-      setWalletUser(user);
+      try {
+        const user = await authenticate({
+          provider: "walletconnect",
+          chainId: 56,
+          signingMessage: "Hello wallet"
+        });
+        if(user) {
+          login(user);
+          setWalletUser(user);
+        }
+      } catch(err) {
+        console.log(err);
+      }
     }
   
     const authMetamask = async () => {
-      const user = await authenticate({
-        signingMessage: "Hello metamask"
-      });
-      login(user);
-      setMetaUser(user)
+      try {
+        const user = await authenticate({
+          signingMessage: "Hello metamask"
+        });
+        if(user) {
+          if(user.attributes && user.attributes.email) {
+            login(user);
+            setMetaUser(user)
+          } else {
+            navigate('/auth/register');
+          }
+        }
+      } catch(err) {
+        console.log(err);
+      }
     }
 
     switch (selectedWallet) {

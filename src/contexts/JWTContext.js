@@ -153,6 +153,7 @@ function AuthProvider({ children }) {
 
   const logout = async () => {
     setSession(null);
+    setLoggedIn(false);
     dispatch({ type: 'LOGOUT' });
   };
 
