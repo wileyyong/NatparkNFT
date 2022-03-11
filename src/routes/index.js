@@ -42,9 +42,9 @@ export default function Router() {
         {
           path: 'register',
           element: (
-            <GuestGuard>
+            <AuthGuard>
               <Register />
-            </GuestGuard>
+            </AuthGuard>
           ),
         },
         { path: 'login-unprotected', element: <Login /> },

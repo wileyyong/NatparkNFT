@@ -16,7 +16,7 @@ export default function Logo({ disabledLink = false, sx }) {
   const logo = (
     <Box sx={{ width: 40, height: 40, ...sx }}>
       <Image
-        src={'images/shield-logo.svg'}
+        src={'/images/shield-logo.svg'}
         sx={{borderRadius: 1}}
       />
     </Box>

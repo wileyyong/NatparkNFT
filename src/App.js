@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useMoralis } from 'react-moralis';
 // routes
 import Router from './routes';
 // theme
@@ -13,9 +15,21 @@ import ThemeColorPresets from './components/ThemeColorPresets';
 import ThemeLocalization from './components/ThemeLocalization';
 import MotionLazyContainer from './components/animate/MotionLazyContainer';
 
+import useAuth from './hooks/useAuth';
+
 // ----------------------------------------------------------------------
 
 export default function App() {
+  const { user } = useMoralis();
+  const { login } = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+    if(user && user.attributes) {
+      login(user.attributes);
+    }
+  }, [user]);
+
   return (
     <ThemeProvider>
       <ThemeColorPresets>
