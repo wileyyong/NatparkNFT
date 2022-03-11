@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo, useContext } from 'react';
-import { useNFTBalances, useMoralisWeb3Api } from "react-moralis";
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useNFTBalances } from "react-moralis";
+import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import NFTInfo from '../components/NFTInfo';
@@ -23,7 +23,9 @@ function MyNFTs() {
 			const data = result?.map(item => ({
 				...item, 
 				metadata: JSON.parse(item.metadata)
-			})).filter(item => item.metadata);
+			}))
+			.filter(item => item.metadata)
+			.filter(item => item.token_address === "0x64dc7f3624a1456a7ba52025fcfddf428fff92e0");
 			setNFTs(data);
 		});
 	}, []);
@@ -31,7 +33,9 @@ function MyNFTs() {
 
 	return (
 		<div >
-			<NFTInfo address={user.ethAddress} />
+			<Box mb={2}>
+				<NFTInfo address={user.ethAddress} />
+			</Box>
 			{
 				nfts.length > 0 ? (
 					<NFTDiv>

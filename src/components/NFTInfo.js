@@ -53,11 +53,12 @@ export default function NFTInfo({address}) {
           };
         }
       });
-      setUsers(
-        Object.keys(uObj)
+
+      const uArr = (Object.keys(uObj) || [])
         .map(key => uObj[key])
-        .sort((a, b) => b.count - a.count)
-      );
+        .sort((a, b) => b.count - a.count);
+      
+      setUsers(uArr);
     } else if(nfts.length === total) {
       setLoading(false);
     }
@@ -70,10 +71,18 @@ export default function NFTInfo({address}) {
   }, [nfts]);
 
   const collectedParks = useMemo(() => {
-    let result = [];
-    result = nfts.filter(item => item.owner_of === address);
+    const result = [];
+
+    collectedItems.forEach(item => {
+      if(item.attributes) {
+        const trait = item.attributes.find(attr => attr.trait_type === 'Parks');
+        if(trait && !result.includes(trait.value)) {
+          result.push(trait.value);
+        }
+      }
+    });
     return result;
-  }, [nfts]);
+  }, [collectedItems]);
 
   const fetchAll = () => {
     const options = {
