@@ -73,15 +73,15 @@ export default function NavbarVertical({ isOpenSidebar, onCloseSidebar }) {
           ...(isCollapse && { alignItems: 'center' }),
         }}
       >
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Logo sx={{ height: 80, width: 80 }} />
-
+        <Stack direction="row" alignItems="center" justifyContent="flex-end">
           {isDesktop && !isCollapse && (
             <CollapseButton onToggleCollapse={onToggleCollapse} collapseClick={collapseClick} />
           )}
         </Stack>
+        <Box width="100%" display="flex" justifyContent="center">
+          <Logo sx={{ height: 80, width: 80 }} />
+        </Box>
 
-        <NavbarAccount isCollapse={isCollapse} />
       </Stack>
 
       <NavSectionVertical navConfig={navConfig} isCollapse={isCollapse} />
