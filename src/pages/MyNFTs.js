@@ -23,7 +23,9 @@ function MyNFTs() {
 			const data = result?.map(item => ({
 				...item, 
 				metadata: JSON.parse(item.metadata)
-			})).filter(item => item.metadata);
+			}))
+			.filter(item => item.metadata)
+			.filter(item => item.token_address === "0x64dc7f3624a1456a7ba52025fcfddf428fff92e0");
 			setNFTs(data);
 		});
 	}, []);
