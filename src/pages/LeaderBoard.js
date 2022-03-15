@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
 import { 
@@ -16,8 +17,8 @@ export default function LeaderBoard() {
 		const [page, setPage] = useState(0);
 		const [rowsPerPage, setRowsPerPage] = useState(5);
 
-		const emptyRows =
-			page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
+		// const emptyRows =
+		// 	page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
 
 		const handleChangePage = (event, newPage) => {
 			setPage(newPage);

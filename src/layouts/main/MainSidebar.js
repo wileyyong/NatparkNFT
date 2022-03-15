@@ -3,7 +3,7 @@
 import { styled } from '@mui/material/styles';
 import { Link } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../routes/paths';
+// import { PATH_PAGE } from '../../routes/paths';
 // components
 import Logo from '../../components/Logo';
 

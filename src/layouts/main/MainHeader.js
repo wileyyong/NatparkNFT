@@ -1,21 +1,21 @@
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container } from '@mui/material';
+import { AppBar, Toolbar, Container } from '@mui/material';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
-import useResponsive from '../../hooks/useResponsive';
+// import useResponsive from '../../hooks/useResponsive';
 // utils
 import cssStyles from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config';
 // components
-import Logo from '../../components/Logo';
-import Label from '../../components/Label';
+// import Logo from '../../components/Logo';
+// import Label from '../../components/Label';
 //
-import MenuDesktop from './MenuDesktop';
-import MenuMobile from './MenuMobile';
-import navConfig from './MenuConfig';
+// import MenuDesktop from './MenuDesktop';
+// import MenuMobile from './MenuMobile';
+// import navConfig from './MenuConfig';
 
 // ----------------------------------------------------------------------
 
@@ -50,11 +50,11 @@ export default function MainHeader() {
 
   const theme = useTheme();
 
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
-  const isDesktop = useResponsive('up', 'md');
+  // const isDesktop = useResponsive('up', 'md');
 
-  const isHome = pathname === '/';
+  // const isHome = pathname === '/';
 
   return (
     <AppBar sx={{ boxShadow: 0, bgcolor: 'transparent' }}>

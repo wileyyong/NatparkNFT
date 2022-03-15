@@ -10,7 +10,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { useMoralis } from 'react-moralis';
 // hooks
-import useAuth from '../../../hooks/useAuth';
+// import useAuth from '../../../hooks/useAuth';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import Iconify from '../../../components/Iconify';
@@ -22,7 +22,6 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
-  const { register } = useAuth();
 
   const isMountedRef = useIsMountedRef();
   const { setUserData } = useMoralis();

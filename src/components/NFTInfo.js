@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useEffect, useMemo } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
@@ -5,7 +7,7 @@ import { styled } from '@mui/material/styles';
 
 import NFTInfoCard from '../sections/NFTInfoCard';
 
-const NFTInfoDiv = styled('div')(({theme}) => ({
+const NFTInfoDiv = styled('div')(() => ({
   '&': {
     display: 'flex',
     gap: '20px',
@@ -23,7 +25,7 @@ const NFTInfoDiv = styled('div')(({theme}) => ({
   }
 }));
 
-export default function NFTInfo({address}) {
+export default function NFTInfo({ address }) {
 	const {
 		token: { getNFTOwners },
 	} = useMoralisWeb3Api();

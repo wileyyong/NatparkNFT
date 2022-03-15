@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useNFTBalances } from "react-moralis";
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
@@ -6,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import NFTInfo from '../components/NFTInfo';
 import useAuth from '../hooks/useAuth';
 
-const NFTDiv = styled('div')(({ theme }) => ({
+const NFTDiv = styled('div')(() => ({
   display: 'grid',
 	gap: '20px',
 	gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMoralis } from 'react-moralis';
 import { useNavigate } from 'react-router-dom';
 // @mui
@@ -11,14 +12,14 @@ import Dialog from '@mui/material/Dialog';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import useLocalStorage from '../hooks/useLocalStorage';
+// import useLocalStorage from '../hooks/useLocalStorage';
 import useAuth from '../hooks/useAuth';
 
 import Page from '../components/Page';
 import Image from '../components/Image';
 // ----------------------------------------------------------------------
 
-const LeftStyle = styled('div')(({ theme }) => ({
+const LeftStyle = styled('div')(() => ({
   display: 'flex',
   backgroundColor: '#1D252F',
   padding: '3rem 3rem',
@@ -28,7 +29,7 @@ const LeftStyle = styled('div')(({ theme }) => ({
   flexDirection: 'column'
 }));
 
-const RightStyle = styled('div')(({ theme }) => ({
+const RightStyle = styled('div')(() => ({
   display: 'flex',
   backgroundColor: '#161c24',
   padding: '0rem 1rem',
