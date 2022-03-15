@@ -29,7 +29,7 @@ NFTIntoCard.propTypes = {
   firstTitle: PropTypes.string.isRequired,
   firstTotal: PropTypes.number.isRequired,
   secondTitle: PropTypes.string.isRequired,
-  secondTotal: PropTypes.number.isRequired,
+  secondTotal: PropTypes.number,
 };
 
 export default function NFTIntoCard({ 

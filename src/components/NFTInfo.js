@@ -33,7 +33,7 @@ export default function NFTInfo({ address }) {
 	} = useMoralisWeb3Api();
 	
 	const [nfts, setNFTs] = useState([]);
-	const [users, setUsers] = useState([]);
+	const [users, setUsers] = useState(0);
 	const [total, setTotal] = useState(-1);
 	const [loading, setLoading] = useState(false);
     
@@ -61,8 +61,7 @@ export default function NFTInfo({ address }) {
       const uArr = (Object.keys(uObj) || [])
         .map(key => uObj[key])
         .sort((a, b) => b.count - a.count);
-      
-      setUsers(uArr);
+      setUsers(uArr.length);
     } else if(nfts.length === total) {
       setLoading(false);
     }
@@ -119,7 +118,7 @@ export default function NFTInfo({ address }) {
         firstTitle="Items" 
         firstTotal={nfts.length}
         secondTitle="Owners"
-        secondTotal={users.length}
+        secondTotal={users}
       />
     </NFTInfoDiv>
   )

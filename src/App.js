@@ -25,7 +25,6 @@ export default function App() {
   const { login } = useAuth();
 
   useEffect(() => {
-    console.log(user);
     if(user && user.attributes) {
       login(user.attributes);
     }
