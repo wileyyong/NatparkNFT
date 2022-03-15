@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNFTBalances } from "react-moralis";
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
+import axios from 'axios';
 import NFTInfo from '../components/NFTInfo';
 import { ADMIN_WALLET } from '../config';
 
@@ -27,13 +27,36 @@ function MyNFTs() {
 		getNFTBalances({params}).then(({result}) => {
 			const data = result.map(item => ({
 				...item, 
-				metadata: JSON.parse(item.metadata)
+				metadata: JSON.parse(item.metadata),
+				data: getRealData(item.token_uri)
 			}))
 			.filter(item => item.metadata)
 			.filter(item => item.token_address === ADMIN_WALLET);
 			setNFTs(data);
 		});
 	}, [routeParams.id]);
+
+	const getRealData = async (data) => {
+		await axios.get(data, {
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': 'Origin, X-Requested-with, Content-Type, Accept',
+			},
+			}).then((response) => {
+				console.log(JSON.parse(response));
+			}).catch((error) => {
+				if (error.response) {
+					console.log(error.response.headers);
+				} 
+				else if (error.request) {
+						console.log(error.request);
+				} 
+				else {
+					console.log(error.message);
+				}
+			console.log(error.config);
+		});
+	}
 
 	return (
 		<div>
@@ -50,7 +73,7 @@ function MyNFTs() {
 										component="img"
 										alt="green iguana"
 										height="350"
-										image={item.metadata.image}
+										image={(item.data && item.data.image) || item.metadata.image}
 									/>
 									<CardContent>
 										<Typography gutterBottom variant="h5" component="div">
