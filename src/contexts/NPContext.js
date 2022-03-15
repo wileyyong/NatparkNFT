@@ -1,6 +1,9 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
+import { ADMIN_WALLET } from 'src/config';
 
 // ----------------------------------------------------------------------
 
@@ -60,7 +63,7 @@ function NPProvider({ children }) {
 
   const fetchAll = () => {
     const options = {
-      address: '0x64dc7f3624a1456a7ba52025fcfddf428fff92e0',
+      address: ADMIN_WALLET,
       offset: nfts.length,
     };
     getNFTOwners(options).then((data) => {
@@ -74,11 +77,11 @@ function NPProvider({ children }) {
     });
   };
 
-  const refresh = () => {
-    setTotal(0);
-    setNFTs([]);
-    setLoading(true);
-  }
+  // const refresh = () => {
+  //   setTotal(0);
+  //   setNFTs([]);
+  //   setLoading(true);
+  // }
 
   return (
     <NPContext.Provider

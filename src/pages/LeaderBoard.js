@@ -1,7 +1,9 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
-import { 
+import { ADMIN_WALLET } from 'src/config'; 
+import {
 	TableContainer, Table, TableHead, TableRow, 
 	TableCell, TableBody, Paper, TablePagination, TableFooter,
 	Link,
@@ -31,7 +33,7 @@ export default function LeaderBoard() {
 
     useEffect(() => {
 			const options = {
-				address: '0x64dc7f3624a1456a7ba52025fcfddf428fff92e0',
+				address: ADMIN_WALLET,
 			};
 			getNFTOwners(options).then((data) => {
 				setNFTs(data.result);

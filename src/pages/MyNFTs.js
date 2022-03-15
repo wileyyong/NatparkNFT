@@ -1,7 +1,9 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useNFTBalances } from "react-moralis";
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { ADMIN_WALLET } from 'src/config';
 import { styled } from '@mui/material/styles';
 
 import NFTInfo from '../components/NFTInfo';
@@ -26,7 +28,7 @@ function MyNFTs() {
 				metadata: JSON.parse(item.metadata)
 			}))
 			.filter(item => item.metadata)
-			.filter(item => item.token_address === "0x64dc7f3624a1456a7ba52025fcfddf428fff92e0");
+			.filter(item => item.token_address === ADMIN_WALLET);
 			setNFTs(data);
 		});
 	}, []);

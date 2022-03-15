@@ -69,3 +69,5 @@ export const defaultSettings = {
   themeLayout: 'horizontal',
   themeStretch: false,
 };
+
+export const ADMIN_WALLET = '0x64dc7f3624a1456a7ba52025fcfddf428fff92e0';

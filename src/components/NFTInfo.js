@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -5,6 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useMoralisWeb3Api } from "react-moralis";
 import { styled } from '@mui/material/styles';
 
+import { ADMIN_WALLET } from 'src/config';
 import NFTInfoCard from '../sections/NFTInfoCard';
 
 const NFTInfoDiv = styled('div')(() => ({
@@ -88,7 +90,7 @@ export default function NFTInfo({ address }) {
 
   const fetchAll = () => {
     const options = {
-      address: '0x64dc7f3624a1456a7ba52025fcfddf428fff92e0',
+      address: ADMIN_WALLET,
       offset: nfts.length,
     };
     getNFTOwners(options).then((data) => {

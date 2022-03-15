@@ -6,6 +6,7 @@ import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import NFTInfo from '../components/NFTInfo';
+import { ADMIN_WALLET } from '../config';
 
 const NFTDiv = styled('div')(() => ({
   display: 'grid',
@@ -29,7 +30,7 @@ function MyNFTs() {
 				metadata: JSON.parse(item.metadata)
 			}))
 			.filter(item => item.metadata)
-			.filter(item => item.token_address === "0x64dc7f3624a1456a7ba52025fcfddf428fff92e0");
+			.filter(item => item.token_address === ADMIN_WALLET);
 			setNFTs(data);
 		});
 	}, [routeParams.id]);
