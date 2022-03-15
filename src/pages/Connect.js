@@ -19,10 +19,13 @@ import Page from '../components/Page';
 import Image from '../components/Image';
 // ----------------------------------------------------------------------
 
-const LeftStyle = styled('div')(() => ({
+const LeftStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   backgroundColor: '#1D252F',
   padding: '3rem 3rem',
+  [theme.breakpoints.down('sm')]: {
+    padding: '1rem 1rem'
+  },
   margin: '1rem',
   height: 'calc(100vh - 2rem)',
   borderRadius: '10px',
@@ -154,7 +157,7 @@ function App() {
 
   return (
     <Page title="Connect" sx={{backgroundColor: '#161c24'}}>
-      <Grid container>
+      <Grid container sx={{ flexWrap: 'wrap-reverse' }}>
         <Grid item lg={4}>
           <LeftStyle>
             <Typography component="p" variant="h6" sx={{ mt: '2rem', color: '#FFFFFF' }}>
@@ -200,11 +203,11 @@ function App() {
               sx={{borderRadius: 1}}
             />
             </Box>
-            <Box sx={{padding: '1rem 3rem', width: '50%'}}>
+            <Box padding={{ xs: '1rem 1rem', sm: '1rem 3rem' }} width={{ sm: '50%' }}>
               <Typography component="p" variant="h4" sx={{ color: '#FFFFFF'}}>The clearest way into the Universe is through a forest wilderness.</Typography>
               <Typography sx={{ mt: '1rem', color: '#919EAB'}}>— John Muir</Typography>
             </Box>
-            <Box sx={{mt: '2rem', mb:'4rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Box sx={{mt: '2rem', mb:'2rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               {!metaUser && !walletUser && (
                 <Button 
                   variant="contained"
