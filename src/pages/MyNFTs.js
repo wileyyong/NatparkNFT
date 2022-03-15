@@ -41,7 +41,7 @@ function MyNFTs() {
 			</Box>
 			{
 				nfts.length > 0 ? (
-					<NFTDiv>
+					<NFTDiv style={{ paddingTop: 20, paddingBottom: 20 }}>
 						{
 							nfts.filter(item => item.metadata).map((item, index) => (
 								<Card key={index}>
