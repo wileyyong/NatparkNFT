@@ -17,7 +17,7 @@ export default function LeaderBoard() {
     const [nfts, setNFTs] = useState([]);
     const [users, setUsers] = useState([]);
 		const [page, setPage] = useState(0);
-		const [rowsPerPage, setRowsPerPage] = useState(5);
+		const [rowsPerPage, setRowsPerPage] = useState(10);
 
 		// const emptyRows =
 		// 	page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
