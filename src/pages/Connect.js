@@ -41,7 +41,7 @@ const RightStyle = styled('div')(() => ({
   alignItems: 'center'
 }));
 
-const wallets = ['Metamask', 'WalletConnect'];
+const wallets = ['Metamask', 'Wallet Connect', 'Coinbase Wallet'];
 
 function WalletDialog(props) {
   const { onClose, open } = props;
@@ -103,10 +103,30 @@ function App() {
   };
 
   useEffect(() => {
+    const authCoinbaseWallet = async () => {
+      try {
+        const user = await authenticate({
+          provider: "coinbase",
+          chainId: 3,
+          signingMessage: "Hello Coinbase"
+        })
+        console.log(user);
+      } catch(err) {
+        console.log(err);
+      }
+    }
     const authWalletConnect = async () => {
       try {
         const user = await authenticate({
           provider: "walletconnect",
+          mobileLinks: [
+            "rainbow",
+            "metamask",
+            "argent",
+            "trust",
+            "imtoken",
+            "pillar",
+          ],
           chainId: 56,
           signingMessage: "Hello wallet"
         });
@@ -141,8 +161,11 @@ function App() {
       case "Metamask":
         authMetamask();
         break;
-      case "WalletConnect":
+      case "Wallet Connect":
         authWalletConnect();
+        break;
+      case "Coinbase Wallet":
+        authCoinbaseWallet();
         break;
       default:
         break;
