@@ -48,6 +48,13 @@ function MyNFTs() {
 		return data;
 	}
 
+	const getParksName = (attributes) => {
+		const park = attributes.find(attr => attr.trait_type === 'Parks');
+		if (park && park.value) {
+			return park.value;
+		}
+	}
+
 	return (
 		<div>
 			<Box mb={2}>
@@ -70,6 +77,9 @@ function MyNFTs() {
 											<CardContent>
 												<Typography gutterBottom variant="h5" component="div">
 													{ item.data.name || item.metadata.description }
+												</Typography>
+												<Typography variant="body1" color="text.secondary">
+													{ getParksName(item.data.attributes) }
 												</Typography>
 												<Typography variant="body2" color="text.secondary">
 													{ item.data.description || item.metadata.description }
