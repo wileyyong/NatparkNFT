@@ -82,7 +82,7 @@ export default function NFTInfo({ user, address, items }) {
       items.forEach(item => {
         if(item.data && item.data.attributes) {
           const trait = item.data.attributes.find(attr => attr.trait_type === 'Parks');
-          if(trait) {
+          if(trait && !result.includes(trait.value)) {
             result.push(trait.value);
           }
         }
