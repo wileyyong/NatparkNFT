@@ -33,39 +33,44 @@ export default function NFTInfo({ user, address, items }) {
 	} = useMoralisWeb3Api();
 	
 	const [nfts, setNFTs] = useState([]);
-	const [users, setUsers] = useState(0);
-	const [total, setTotal] = useState(-1);
-	const [loading, setLoading] = useState(false);
+	const [total, setTotal] = useState(localStorage.getItem('total') ? parseInt(localStorage.getItem('total'), 10) : 0);
+  const [owners, setOwners] = useState(localStorage.getItem('users') ? parseInt(localStorage.getItem('users'), 10) : 0);
+  const [loading, setLoading] = useState(false);
     
-  useEffect(() => {
-    fetchAll();
+  useEffect(async() => {
+    await fetchAll();
   }, [nfts, setNFTs]);
+  useEffect(() => {
+    setInterval(async() => {
+      await fetchAll();
+    }, 300000);
+  }, [loading]);
 
   useEffect(() => {
-    if(!loading) {
-      const uObj = {};
-      nfts.forEach(item => {
-        if(uObj[item.owner_of]) {
-          uObj[item.owner_of] = {
-            ...uObj[item.owner_of],
-            count: uObj[item.owner_of].count + 1
-          };
-        } else {
-          uObj[item.owner_of] = {
-            address: item.owner_of,
-            count: 1
-          };
-        }
-      });
-
+    const uObj = {};
+    nfts.forEach(item => {
+      if(uObj[item.owner_of]) {
+        uObj[item.owner_of] = {
+          ...uObj[item.owner_of],
+          count: uObj[item.owner_of].count + 1
+        };
+      } else {
+        uObj[item.owner_of] = {
+          address: item.owner_of,
+          count: 1
+        };
+      }
+    });
+    if (nfts.length === total) {
+      localStorage.setItem('total', total);
       const uArr = (Object.keys(uObj) || [])
         .map(key => uObj[key])
         .sort((a, b) => b.count - a.count);
-      setUsers(uArr);
-    } else if(nfts.length === total) {
+      setOwners(uArr.length);
+      localStorage.setItem('users', uArr.length);
       setLoading(false);
     }
-  }, [nfts, loading]);
+  }, [nfts]);
 
   const collectedItems = useMemo(() => {
     let result = [];
@@ -104,6 +109,9 @@ export default function NFTInfo({ user, address, items }) {
         ]);
       }
       setTotal(data.total);
+      if (localStorage.getItem('total') && parseInt(localStorage.getItem('total'), 10) !== data.total) {
+        setLoading(true);
+      }
     });
   };
 
@@ -121,9 +129,9 @@ export default function NFTInfo({ user, address, items }) {
         logoText="NPNFT"
         address=""
         firstTitle="Items" 
-        firstTotal={nfts.length}
+        firstTotal={total}
         secondTitle="Owners"
-        secondTotal={users.length || 0}
+        secondTotal={owners}
       />
     </NFTInfoDiv>
   )
