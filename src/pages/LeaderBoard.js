@@ -46,21 +46,22 @@ export default function LeaderBoard() {
 				if(uObj[item.owner_of]) {
 					uObj[item.owner_of] = {
 						...uObj[item.owner_of],
-						count: uObj[item.owner_of].count + 1
+						items: uObj[item.owner_of].items + 1
 					};
 				} else {
 					uObj[item.owner_of] = {
 						address: item.owner_of,
-						count: 1
+						items: 1
 					};
 				}
 			});
 			setUsers(
 				Object.keys(uObj)
 				.map(key => uObj[key])
-				.sort((a, b) => b.count - a.count)
+				.sort((a, b) => b.items - a.items)
 			);
     }, [nfts]);
+
 
     return (
 			<div>
@@ -88,8 +89,8 @@ export default function LeaderBoard() {
 											<Link href={`/owners/${row.address}`}>{row.address}</Link>
 										</TableCell>
 										<TableCell>{row.address}</TableCell>
-										<TableCell>{row.count}</TableCell>
-										<TableCell>{row.count}</TableCell>
+										<TableCell>{row.items}</TableCell>
+										<TableCell>{row.items}</TableCell>
 									</TableRow>
 							))}
 						</TableBody>

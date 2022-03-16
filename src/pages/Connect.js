@@ -41,7 +41,7 @@ const RightStyle = styled('div')(() => ({
   alignItems: 'center'
 }));
 
-const wallets = ['Metamask', 'Wallet Connect', 'Coinbase Wallet'];
+const wallets = ['Metamask', 'Wallet Connect'];
 
 function WalletDialog(props) {
   const { onClose, open } = props;
