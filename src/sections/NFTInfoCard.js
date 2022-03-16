@@ -5,8 +5,6 @@ import { Card, Typography, Box } from '@mui/material';
 // utils
 import { fNumber } from '../utils/formatNumber';
 
-import Image from '../components/Image';
-
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -25,7 +23,7 @@ const RootStyle = styled(Card)(({ theme }) => ({
 NFTIntoCard.propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'warning', 'error']),
   logoText: PropTypes.string,
-  logoImg: PropTypes.string,
+  address: PropTypes.string,
   firstTitle: PropTypes.string.isRequired,
   firstTotal: PropTypes.number.isRequired,
   secondTitle: PropTypes.string.isRequired,
@@ -34,7 +32,7 @@ NFTIntoCard.propTypes = {
 
 export default function NFTIntoCard({ 
   logoText, 
-  logoImg, 
+  address, 
   firstTitle,
   firstTotal,
   secondTitle,
@@ -42,23 +40,28 @@ export default function NFTIntoCard({
   color = 'primary' 
 }) {
   const theme = useTheme();
-
+  const getWallet = (str) => {
+    if (!str || str.length < 20) return "";
+    return (
+      `${str.substring(0, 15)  }...${  str.substring(str.length - 4, str.length)}`
+    );
+  }
   return (
     <RootStyle
       sx={{
         bgcolor: theme.palette[color].darker,
       }}
     >
-      {
-        logoText && (
-          <Typography variant="h4">{ logoText }</Typography>
-        )
-      }
-      {
-        logoImg && (
-          <Image alt="cover" src={logoImg} />
-        )
-      }
+      <Box sx={{ mr: 3, color: 'common.white' }}>
+        {
+          logoText && (
+            <Typography variant="h4">{ logoText }</Typography>
+          )
+        }
+        {
+          address && <Typography variant="body2" sx={{ opacity: 0.72 }}>{getWallet(address)}</Typography>
+        }
+      </Box>
       <Box sx={{ mr: 3, color: 'common.white' }}>
         <Typography variant="h4"> {fNumber(firstTotal)}</Typography>
         <Typography variant="body2" sx={{ opacity: 0.72 }}>

@@ -111,14 +111,16 @@ export default function NFTInfo({ address, items }) {
     <NFTInfoDiv>
       
       <NFTInfoCard
-        logoText="" 
+        logoText="Mixart"
+        address={address}
         firstTitle="Items Collected" 
         firstTotal={collectedItems.length}
         secondTitle="Parks Collected"
         secondTotal={collectedParks.length || 0} 
       />
       <NFTInfoCard
-        logoText="NPNFT" 
+        logoText="NPNFT"
+        address=""
         firstTitle="Items" 
         firstTotal={nfts.length}
         secondTitle="Owners"
