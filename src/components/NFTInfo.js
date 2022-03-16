@@ -27,7 +27,7 @@ const NFTInfoDiv = styled('div')(() => ({
   }
 }));
 
-export default function NFTInfo({ address }) {
+export default function NFTInfo({ address, items }) {
 	const {
 		token: { getNFTOwners },
 	} = useMoralisWeb3Api();
@@ -61,7 +61,7 @@ export default function NFTInfo({ address }) {
       const uArr = (Object.keys(uObj) || [])
         .map(key => uObj[key])
         .sort((a, b) => b.count - a.count);
-      setUsers(uArr.length);
+      setUsers(uArr);
     } else if(nfts.length === total) {
       setLoading(false);
     }
@@ -69,23 +69,27 @@ export default function NFTInfo({ address }) {
 
   const collectedItems = useMemo(() => {
     let result = [];
-    result = nfts.filter(item => item.owner_of === address);
+    if (items.length > 0) {
+      result = items.filter(item => item.owner_of === address);
+    }
     return result;
-  }, [nfts]);
+  }, [items]);
 
   const collectedParks = useMemo(() => {
     const result = [];
 
-    collectedItems.forEach(item => {
-      if(item.attributes) {
-        const trait = item.attributes.find(attr => attr.trait_type === 'Parks');
-        if(trait && !result.includes(trait.value)) {
-          result.push(trait.value);
+    if (items.length > 0) {
+      items.forEach(item => {
+        if(item.data && item.data.attributes) {
+          const trait = item.data.attributes.find(attr => attr.trait_type === 'Parks');
+          if(trait) {
+            result.push(trait.value);
+          }
         }
-      }
-    });
+      });
+    }
     return result;
-  }, [collectedItems]);
+  }, [items]);
 
   const fetchAll = () => {
     const options = {
@@ -111,14 +115,14 @@ export default function NFTInfo({ address }) {
         firstTitle="Items Collected" 
         firstTotal={collectedItems.length}
         secondTitle="Parks Collected"
-        secondValue={collectedParks.length} 
+        secondTotal={collectedParks.length || 0} 
       />
       <NFTInfoCard
         logoText="NPNFT" 
         firstTitle="Items" 
         firstTotal={nfts.length}
         secondTitle="Owners"
-        secondTotal={users}
+        secondTotal={users.length || 0}
       />
     </NFTInfoDiv>
   )
