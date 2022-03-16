@@ -69,10 +69,10 @@ function MyNFTs() {
 											/>
 											<CardContent>
 												<Typography gutterBottom variant="h5" component="div">
-													{ item.data.name }
+													{ item.data.name || item.metadata.description }
 												</Typography>
 												<Typography variant="body2" color="text.secondary">
-													{ item.metadata.description }
+													{ item.data.description || item.metadata.description }
 												</Typography>
 											</CardContent>
 										</Card>
