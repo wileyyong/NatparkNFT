@@ -46,6 +46,12 @@ export default function NFTIntoCard({
       `${str.substring(0, 15)  }...${  str.substring(str.length - 4, str.length)}`
     );
   }
+  const getUsername = (str) => {
+    if (!str || str.length < 20) return "";
+    return (
+      `${str.substring(0, 5).toUpperCase()}`
+    );
+  }
   return (
     <RootStyle
       sx={{
@@ -54,8 +60,10 @@ export default function NFTIntoCard({
     >
       <Box sx={{ mr: 3, color: 'common.white' }}>
         {
-          logoText && (
-            <Typography variant="h4">{ logoText }</Typography>
+          logoText ? (
+            <Typography variant="h4">{ logoText.toUpperCase() }</Typography>
+          ) : (
+            <Typography variant="h4">{ getUsername(address) }</Typography>
           )
         }
         {

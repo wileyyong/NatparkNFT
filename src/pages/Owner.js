@@ -18,7 +18,6 @@ const NFTDiv = styled('div')(() => ({
 function MyNFTs() {
 	const { getNFTBalances } = useNFTBalances();
 	const routeParams = useParams();
-
 	const [nfts, setNFTs] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -58,7 +57,7 @@ function MyNFTs() {
 	return (
 		<div>
 			<Box mb={2}>
-				<NFTInfo address={routeParams.id} items={nfts} />
+				<NFTInfo user={''} address={routeParams.id} items={nfts} />
 			</Box>
 			{
 				loading ? <Box display="flex" justifyContent='center' alignItems='center' height="50vh"><CircularProgress color="success" /></Box> : <>

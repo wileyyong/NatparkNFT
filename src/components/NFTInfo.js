@@ -27,7 +27,7 @@ const NFTInfoDiv = styled('div')(() => ({
   }
 }));
 
-export default function NFTInfo({ address, items }) {
+export default function NFTInfo({ user, address, items }) {
 	const {
 		token: { getNFTOwners },
 	} = useMoralisWeb3Api();
@@ -109,9 +109,8 @@ export default function NFTInfo({ address, items }) {
 
   return (
     <NFTInfoDiv>
-      
       <NFTInfoCard
-        logoText="Mixart"
+        logoText={user ? user.username : ''}
         address={address}
         firstTitle="Items Collected" 
         firstTotal={collectedItems.length}

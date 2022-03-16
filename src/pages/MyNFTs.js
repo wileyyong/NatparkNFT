@@ -57,7 +57,7 @@ function MyNFTs() {
 	return (
 		<div >
 			<Box mb={2}>
-				<NFTInfo address={user.ethAddress} items={nfts} />
+				<NFTInfo user={user} address={user.ethAddress} items={nfts} />
 			</Box>
 			{
 				loading ? <Box display="flex" justifyContent='center' alignItems='center' height="50vh"><CircularProgress color="success" /></Box> : <>
