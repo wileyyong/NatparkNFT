@@ -36,13 +36,16 @@ export default function NFTInfo({ user, address, items }) {
 	const [total, setTotal] = useState(localStorage.getItem('total') ? parseInt(localStorage.getItem('total'), 10) : 0);
   const [owners, setOwners] = useState(localStorage.getItem('users') ? parseInt(localStorage.getItem('users'), 10) : 0);
   const [loading, setLoading] = useState(false);
+  const [isRecall, setRecall] = useState(false);
     
   useEffect(async() => {
     await fetchAll();
   }, [nfts, setNFTs]);
   useEffect(() => {
     setInterval(async() => {
-      await fetchAll();
+      if (isRecall) {
+        await fetchAll();
+      }
     }, 300000);
   }, [loading]);
 
@@ -69,6 +72,7 @@ export default function NFTInfo({ user, address, items }) {
       setOwners(uArr.length);
       localStorage.setItem('users', uArr.length);
       setLoading(false);
+      setRecall(true);
     }
   }, [nfts]);
 
