@@ -51,7 +51,7 @@ export default function LeaderBoard() {
 					setUsers([...users]);
 				}
 			});
-		}, [page, users.length]);
+		}, [page, users.length, rowsPerPage]);
 
 		const handleChangePage = (event, newPage) => {
 			setPage(newPage);
